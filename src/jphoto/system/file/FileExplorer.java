@@ -49,7 +49,7 @@ public class FileExplorer {
             if(file.isDirectory()) {
                 fileList.add(new Folder(file.getAbsolutePath(), this));
             } else {
-                if(file.getName().endsWith(".png") || file.getName().endsWith("jpeg")) {
+                if(file.getName().endsWith(".png") || file.getName().endsWith(".jpeg")) {
                     fileList.add((ImageFile)file);
                 } else {
                     fileList.add((UndefinedFile)file);
