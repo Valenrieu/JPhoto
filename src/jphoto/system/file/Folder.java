@@ -6,8 +6,19 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class Folder extends FileObject implements Openable {
-    public Folder(String path, String name) {
-        super(path, name);
+    private FileExplorer fileExplorer;
+    private boolean isParentFolder;
+
+    public Folder(String path, FileExplorer fileExplorer) {
+        super(path);
+        this.fileExplorer = fileExplorer;
+        icon = this.loadIcon();
+    }
+
+    public Folder(String path, FileExplorer fileExplorer, boolean isParentFolder) {
+        super(path);
+        this.fileExplorer = fileExplorer;
+        this.isParentFolder = isParentFolder;
         icon = this.loadIcon();
     }
 
@@ -23,7 +34,18 @@ public class Folder extends FileObject implements Openable {
         return image;
     }
 
+    public String getName() {
+        if(isParentFolder) {
+            return "..";
+        }
+        return super.getName();
+    }
+
     public void open() throws DeletedFileOrFolderException {
-        // Do something
+        if(!this.exists()) {
+            throw new DeletedFileOrFolderException();
+        }
+
+        fileExplorer.updatePath(this);
     }
 }

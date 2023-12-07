@@ -6,8 +6,8 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class ImageFile extends FileObject implements Openable {
-    public ImageFile(String path, String name) {
-        super(path, name);
+    public ImageFile(String path) {
+        super(path);
         icon = this.loadIcon();
     }
 

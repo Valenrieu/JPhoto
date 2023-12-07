@@ -6,8 +6,8 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class UndefinedFile extends FileObject {
-    public UndefinedFile(String path, String name) {
-        super(path, name);
+    public UndefinedFile(String path) {
+        super(path);
         icon = this.loadIcon();
     }
 
