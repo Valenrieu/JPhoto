@@ -14,9 +14,5 @@ public abstract class FileObject extends File {
         return icon;
     }
 
-    public String getName() {
-        return super.getName();
-    }
-
     protected abstract BufferedImage loadIcon();
 }
