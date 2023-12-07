@@ -6,7 +6,7 @@ rm classes.txt
 
 find jphoto -iname "*.class" > classes.txt
 echo "Main-Class: jphoto.Main" > Manifest.txt
-jar cvfm JPhoto.jar Manifest.txt @classes.txt res
+jar cfm JPhoto.jar Manifest.txt @classes.txt res
 
 rm Manifest.txt
 rm classes.txt
