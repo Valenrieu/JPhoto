@@ -1,15 +1,20 @@
 package jphoto;
 
 import javax.swing.JPanel;
+import java.awt.BorderLayout;
+
+import jphoto.ui.sidepanel.SidePanel;
 
 public class MainPanel extends JPanel {
-    JPanel mainPanel;
+    SidePanel sidePanel = new SidePanel(this);
 
     public MainPanel() {
         super();
-        this.setValues();
+        this.setLayout(new BorderLayout());
+        this.addComponents();
     }
 
-    private void setValues() {
+    private void addComponents() {
+        this.add(sidePanel, BorderLayout.EAST);
     }
 }

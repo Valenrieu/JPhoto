@@ -41,6 +41,10 @@ public class FileExplorer {
 
         fileList.add(parentFolder);
 
+        if(currentFolder.listFiles()==null) {
+            return;
+        }
+
         for(File file : currentFolder.listFiles()) {
             if(file.isHidden()) {
                 continue;

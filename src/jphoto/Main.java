@@ -13,7 +13,7 @@ public class Main {
 		window.setIconImages(iconManager.iconList);
 		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(true);
+		window.setResizable(false);
 
 		JMenuBar menuBar = new CustomMenu();
 		window.setJMenuBar(menuBar);
