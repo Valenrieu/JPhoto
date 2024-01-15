@@ -1,3 +1,3 @@
 #!/bin/bash
 
-java -jar JPhoto.jar
+java -Dswing.defaultlaf=javax.swing.plaf.nimbus.NimbusLookAndFeel -jar JPhoto.jar

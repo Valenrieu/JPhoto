@@ -17,10 +17,12 @@ public abstract class VButton extends JButton implements ActionListener {
 
     public VButton(String text) {
         super(text);
+        this.addActionListener(this);
     }
 
     public VButton(String text, Icon icon) {
         super(text, icon);
+        this.addActionListener(this);
     }
 
     public abstract void actionPerformed(ActionEvent e);
