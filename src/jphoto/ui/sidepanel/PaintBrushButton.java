@@ -8,13 +8,17 @@ import java.awt.Cursor;
 
 import jphoto.ui.VButton;
 
-class PaintBrushButton extends VButton {
+public class PaintBrushButton extends VButton {
     private JPanel mainPanel;
     private boolean isPressed = false;
 
-    public PaintBrushButton(JPanel mainPanel) {
+    PaintBrushButton(JPanel mainPanel) {
         super(new ImageIcon("res/icons/paint_brush.png"));
         this.mainPanel = mainPanel;
+    }
+
+    public boolean isPressed() {
+        return isPressed;
     }
 
     public void actionPerformed(ActionEvent e) {

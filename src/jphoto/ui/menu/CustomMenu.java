@@ -4,13 +4,17 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import jphoto.MainPanel;
+
 public class CustomMenu extends JMenuBar {
     JMenu file, cryptography, encryption, decryption, filter, blur;
-    JMenuItem save, saveAs, aes128CBCEncryption, aes128CBCDecryption;
+    JMenuItem open, save, saveAs, aes128CBCEncryption, aes128CBCDecryption;
     JMenuItem gaussianBlur, meanBlur;
+    MainPanel mainPanel;
 
-    public CustomMenu() {
+    public CustomMenu(MainPanel mainPanel) {
         super();
+        this.mainPanel = mainPanel;
         this.setSubmenus();
     }
 
@@ -18,8 +22,10 @@ public class CustomMenu extends JMenuBar {
         file = new JMenu("Fichier");
         this.add(file);
 
+        open = new OpenButton(mainPanel);
         save = new JMenuItem("Enregistrer");
         saveAs = new JMenuItem("Enregistrer sous");
+        file.add(open);
         file.add(save);
         file.add(saveAs);
 

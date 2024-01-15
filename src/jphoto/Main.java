@@ -15,11 +15,11 @@ public class Main {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
 
-		JMenuBar menuBar = new CustomMenu();
-		window.setJMenuBar(menuBar);
-
 		MainPanel mainPanel = new MainPanel();
 		window.add(mainPanel);
+
+		JMenuBar menuBar = new CustomMenu(mainPanel);
+		window.setJMenuBar(menuBar);
 
 		window.setVisible(true);
 	}
