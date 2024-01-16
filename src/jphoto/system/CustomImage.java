@@ -2,8 +2,8 @@ package jphoto.system;
 
 import java.awt.image.BufferedImage;
 
-import static jphoto.system.utils.ImageUtils.getRGBFromArray;
-import static jphoto.system.utils.ImageUtils.getRGBFromInt;
+import static jphoto.system.utils.ImageUtils.getARGBFromArray;
+import static jphoto.system.utils.ImageUtils.getARGBFromInt;
 
 public class CustomImage extends BufferedImage {
     public final int height = this.getHeight();
@@ -14,11 +14,11 @@ public class CustomImage extends BufferedImage {
         this.getGraphics().drawImage(image, 0, 0, null);
     }
 
-    public int[] getRGBArray(int x, int y) {
-        return getRGBFromInt(this.getRGB(x, y));
+    public int[] getARGBArray(int x, int y) {
+        return getARGBFromInt(this.getRGB(x, y));
     }
 
-    public void setRGB(int x, int y, int[] rgb) {
-        this.setRGB(x, y, getRGBFromArray(rgb));
+    public void setARGB(int x, int y, int[] argb) {
+        this.setRGB(x, y, getARGBFromArray(argb));
     }
 }

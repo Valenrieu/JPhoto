@@ -16,30 +16,35 @@ public class BlackAndWhiteFilter implements Filter {
     }
 
     public void compute() {
-        int[] currentRGB, newRGB = new int[3];
+        int[] currentARGB, newARGB = new int[4];
         GrayScaleFilter grayScaleFilter = new GrayScaleFilter(image);
         grayScaleFilter.compute();
 
         for(int i=0; i<image.width; i++) {
             for(int j=0; j<image.height; j++) {
-                currentRGB = image.getRGBArray(i, j);
+                currentARGB = image.getARGBArray(i, j);
 
-                // Toutes les composantes sont egales, on verifie seulement la premiere
+                // Toutes les composantes sont egales sauf le alpha,
+                // on verifie seulement la deuxieme (le rouge).
 
-                if(currentRGB[0]<threshold) {
-                    newRGB[0] = 0;
-                    newRGB[1] = 0;
-                    newRGB[2] = 0;
+                if(currentARGB[1]<threshold) {
+                    newARGB[0] = currentARGB[0];
+                    newARGB[1] = 0;
+                    newARGB[2] = 0;
+                    newARGB[3] = 0;
                 } else {
-                    newRGB[0] = 255;
-                    newRGB[1] = 255;
-                    newRGB[2] = 255;
+                    newARGB[0] = currentARGB[0];
+                    newARGB[1] = 255;
+                    newARGB[2] = 255;
+                    newARGB[3] = 255;
                 }
 
-                image.setRGB(i, j, newRGB);
+                image.setARGB(i, j, newARGB);
             }
         }
     }
+
+    // Renvoie tous les seuils possibles.
 
     public static Integer[] getThresholdPossibilites() {
         Integer[] res = new Integer[256];
