@@ -9,7 +9,9 @@ public class GrayScaleFilter implements Filter {
         this.image = image;
     }
 
-    // https://fr.wikipedia.org/wiki/Niveau_de_gris
+    /* La methode que j'ai utilisee :
+     * https://fr.wikipedia.org/wiki/Niveau_de_gris
+     */
 
     public void compute() {
         double[] newARGB = new double[3], gammaExpension = new double[3];

@@ -1,5 +1,6 @@
 package jphoto.ui.sidepanel;
 
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -12,10 +13,11 @@ import jphoto.MainPanel;
 public class SidePanel extends JPanel {
     public final MainPanel mainPanel;
     private JPanel layout1, layout2;
-    private PaintBrushButton paintBrushButton;
+    private ToolButton paintBrushButton, ryanGoslingButton;
     private BrushSizeSpinner brushSizeSpinner;
     private ColorPicker colorPicker;
     private InvertButton invertButton;
+    private final ArrayList<ToolButton> buttons = new ArrayList<ToolButton>();
 
     public SidePanel(MainPanel mainPanel) {
         super();
@@ -24,8 +26,20 @@ public class SidePanel extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
     }
 
+    public ArrayList<ToolButton> getButtons() {
+        return buttons;
+    }
+
+    public RyanGoslingButton getRyanGoslingButton() {
+        return (RyanGoslingButton)ryanGoslingButton;
+    }
+
     public PaintBrushButton getPaintBrushButton() {
-        return paintBrushButton;
+        return (PaintBrushButton)paintBrushButton;
+    }
+
+    public InvertButton getInvertButton() {
+        return invertButton;
     }
 
     public ColorPicker getColorPicker() {
@@ -39,6 +53,7 @@ public class SidePanel extends JPanel {
     private void addContent() {
         layout1 = new JPanel();
         paintBrushButton = new PaintBrushButton(mainPanel);
+        buttons.add(paintBrushButton);
         layout1.add(paintBrushButton);
         brushSizeSpinner = new BrushSizeSpinner(mainPanel);
         layout1.add(brushSizeSpinner);
@@ -52,6 +67,10 @@ public class SidePanel extends JPanel {
 
         invertButton = new InvertButton(mainPanel);
         this.add(invertButton);
+
+        ryanGoslingButton = new RyanGoslingButton(mainPanel);
+        buttons.add(ryanGoslingButton);
+        this.add(ryanGoslingButton);
 
         Box.Filler glue = (Box.Filler)Box.createVerticalGlue();
         glue.changeShape(glue.getMinimumSize(), new Dimension(0, Short.MAX_VALUE), glue.getMaximumSize());

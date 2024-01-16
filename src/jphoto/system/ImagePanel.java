@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import jphoto.MainPanel;
 import jphoto.system.tools.PaintBrush;
+import jphoto.system.tools.RyanGoslingPainter;
 import jphoto.system.filters.Filter;
 import static jphoto.Constants.BRUSH_COLOR;
 import static jphoto.Constants.BRUSH_SIZE;
@@ -20,6 +21,7 @@ public class ImagePanel extends JPanel implements MouseMotionListener, MouseList
     private MainPanel mainPanel;
     private CustomImage image;
     private PaintBrush paintBrush = new PaintBrush(BRUSH_COLOR, BRUSH_SIZE);
+    private static final RyanGoslingPainter ryanGoslingPainter = new RyanGoslingPainter();
 
     public ImagePanel(MainPanel mainPanel) {
         super();
@@ -58,6 +60,8 @@ public class ImagePanel extends JPanel implements MouseMotionListener, MouseList
     public void mouseDragged(MouseEvent e) {
         if(!mainPanel.getSidePanel().getPaintBrushButton().isPressed()) {
             return;
+        } else if(image==null) {
+            return;
         }
 
         Point coordinates = MouseInfo.getPointerInfo().getLocation();
@@ -70,15 +74,21 @@ public class ImagePanel extends JPanel implements MouseMotionListener, MouseList
     }
 
     public void mouseClicked(MouseEvent e) {
-        if(!mainPanel.getSidePanel().getPaintBrushButton().isPressed()) {
+        if(image==null) {
             return;
+        } else if(mainPanel.getSidePanel().getPaintBrushButton().isPressed()) {
+            Point coordinates = MouseInfo.getPointerInfo().getLocation();
+            Point coordinates2 = this.getLocationOnScreen();
+            int x = (int)coordinates.getX() - (int)coordinates2.getX();
+            int y = (int)coordinates.getY() - (int)coordinates2.getY();
+            paintBrush.paint(image, x, y);
+        } else if(mainPanel.getSidePanel().getRyanGoslingButton().isPressed()) {
+            Point coordinates = MouseInfo.getPointerInfo().getLocation();
+            Point coordinates2 = this.getLocationOnScreen();
+            int x = (int)coordinates.getX() - (int)coordinates2.getX();
+            int y = (int)coordinates.getY() - (int)coordinates2.getY();
+            ryanGoslingPainter.drawRyanGosling(image, x, y);
         }
-
-        Point coordinates = MouseInfo.getPointerInfo().getLocation();
-        Point coordinates2 = this.getLocationOnScreen();
-        int x = (int)coordinates.getX() - (int)coordinates2.getX();
-        int y = (int)coordinates.getY() - (int)coordinates2.getY();
-        paintBrush.paint(image, x, y);
 
         this.repaint();
     }

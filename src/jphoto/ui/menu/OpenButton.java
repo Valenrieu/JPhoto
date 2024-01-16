@@ -41,6 +41,7 @@ class OpenButton extends VMenuItem {
 
             try {
                 mainPanel.getImagePanel().setImage(new CustomImage(ImageIO.read(selectedFile)));
+                mainPanel.getSidePanel().getInvertButton().setSelected(false);
             } catch(IOException ex) {
 
             }
