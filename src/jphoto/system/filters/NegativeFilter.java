@@ -10,16 +10,18 @@ public class NegativeFilter implements Filter {
     }
 
     public void compute() {
+        int[] newRGB;
+
         for(int i=0; i<image.width; i++) {
             for(int j=0; j<image.height; j++) {
                 int[] currentRGB = image.getRGBArray(i, j);
-                int[] newArray = new int[3];
+                newRGB = new int[3];
 
-                newArray[0] = 255 - currentRGB[0];
-                newArray[1] = 255 - currentRGB[1];
-                newArray[2] = 255 - currentRGB[2];
+                newRGB[0] = 255 - currentRGB[0];
+                newRGB[1] = 255 - currentRGB[1];
+                newRGB[2] = 255 - currentRGB[2];
 
-                image.setRGB(i, j, newArray);
+                image.setRGB(i, j, newRGB);
             }
         }
     }

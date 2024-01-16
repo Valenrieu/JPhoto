@@ -9,7 +9,7 @@ import jphoto.MainPanel;
 public class CustomMenu extends JMenuBar {
     JMenu file, cryptography, encryption, decryption, filter, blur;
     JMenuItem open, save, saveAs, aes128CBCEncryption, aes128CBCDecryption;
-    JMenuItem gaussianBlur, meanBlur;
+    JMenuItem gaussianBlur, meanBlur, grayScale, blackAndWhite;
     MainPanel mainPanel;
 
     public CustomMenu(MainPanel mainPanel) {
@@ -33,10 +33,14 @@ public class CustomMenu extends JMenuBar {
         blur = new JMenu("Flous");
         gaussianBlur = new JMenuItem("Flou gaussien");
         meanBlur = new JMenuItem("Flou par moyenne");
+        grayScale = new GrayScaleButton(mainPanel);
+        blackAndWhite = new BlackAndWhiteButton(mainPanel);
 
         blur.add(gaussianBlur);
         blur.add(meanBlur);
         filter.add(blur);
+        filter.add(grayScale);
+        filter.add(blackAndWhite);
         this.add(filter);
 
         cryptography = new JMenu("Cryptographie");
