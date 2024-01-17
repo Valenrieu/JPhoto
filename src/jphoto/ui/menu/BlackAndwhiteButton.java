@@ -17,20 +17,12 @@ class BlackAndWhiteButton extends VMenuItem {
         this.mainPanel = mainPanel;
     }
 
-    void setThreshold(Integer threshold) {
-        this.threshold = threshold;
-    }
-
     public void actionPerformed(ActionEvent e) {
         CustomImage image = mainPanel.getImagePanel().getImage();
         Integer[] options = BlackAndWhiteFilter.getThresholdPossibilites();
 
-        try {
-            threshold = (Integer)JOptionPane.showInputDialog(null, "Seuil",
-                        "Choix du seuil", JOptionPane.QUESTION_MESSAGE, null, options, BLACK_AND_WHITE_THRESHOLD);
-        } catch(NumberFormatException ex) {
-            return;
-        }
+        threshold = (Integer)JOptionPane.showInputDialog(null, "Seuil",
+                    "Choix du seuil", JOptionPane.QUESTION_MESSAGE, null, options, BLACK_AND_WHITE_THRESHOLD);
 
         if(image!=null && threshold!=null) {
             BlackAndWhiteFilter filter = new BlackAndWhiteFilter(image, threshold);

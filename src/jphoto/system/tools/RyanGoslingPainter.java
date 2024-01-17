@@ -18,6 +18,7 @@ public class RyanGoslingPainter {
     }
 
     public void drawRyanGosling(CustomImage image, int x, int y) {
+        int[] argb;
         int z = 0, t = 0;
         CustomImage ryanGosling = this.getRandomRyanGosling();
         int halfHeight = (int)ryanGosling.height/2;
@@ -28,10 +29,14 @@ public class RyanGoslingPainter {
 
             for(int j=y-halfHeight; j<y+halfHeight; j++) {
                 try {
-                    image.setARGB(i, j, ryanGosling.getARGBArray(z, t));
+                    argb = ryanGosling.getARGBArray(z, t);
+
+                    if(argb[0]>128) {
+                        image.setARGB(i, j, argb);
+                    }
                 } catch(ArrayIndexOutOfBoundsException e) {
                 }
-            
+
                 t++;
             }
 

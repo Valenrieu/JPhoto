@@ -14,6 +14,18 @@ public class CustomImage extends BufferedImage {
         this.getGraphics().drawImage(image, 0, 0, null);
     }
 
+    public int[][] getSubRGB(int x, int y, int size) {
+        int[][] res = new int[size][size];
+
+        for(int i=x; i<size; i++) {
+            for(int j=y; j<size; j++) {
+                res[i][j] = this.getRGB(i, j);
+            }
+        }
+
+        return res;
+    }
+
     public int[] getARGBArray(int x, int y) {
         return getARGBFromInt(this.getRGB(x, y));
     }
