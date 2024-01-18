@@ -26,15 +26,12 @@ public final class ImageUtils {
     }
 
     public static int[][] expandImage(CustomImage image, int x, int y, int kernelSize) {
-        int z = 0, t = 0;
         int xx = 0, yy = 0;
         int halfKernelSize = (int)kernelSize/2;
         int[][] res = new int[kernelSize][kernelSize];        
 
-        for(int i=x-halfKernelSize; i<x+halfKernelSize; i++) {
-            t = 0;
-
-            for(int j=y-halfKernelSize; j<y+halfKernelSize; j++) {
+        for(int i=x-halfKernelSize, z=0; i<x+halfKernelSize; i++, z++) {
+            for(int j=y-halfKernelSize, t=0; j<y+halfKernelSize; j++, t++) {
                 try  {
                     res[z][t] = getARGBFromArray(image.getARGBArray(i, j));
                 } catch(ArrayIndexOutOfBoundsException e) {
@@ -52,11 +49,7 @@ public final class ImageUtils {
 
                     res[z][t] = getARGBFromArray(image.getARGBArray(xx, yy));
                 }
-
-                t++;
             }
-
-            z++;
         }
 
         return res;

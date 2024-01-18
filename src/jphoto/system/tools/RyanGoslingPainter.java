@@ -19,15 +19,12 @@ public class RyanGoslingPainter {
 
     public void drawRyanGosling(CustomImage image, int x, int y) {
         int[] argb;
-        int z = 0, t = 0;
         CustomImage ryanGosling = this.getRandomRyanGosling();
         int halfHeight = (int)ryanGosling.height/2;
         int halfWidth = (int)ryanGosling.width/2;
 
-        for(int i=x-halfWidth; i<x+halfWidth; i++) {
-            t = 0;
-
-            for(int j=y-halfHeight; j<y+halfHeight; j++) {
+        for(int i=x-halfWidth, z=0; i<x+halfWidth; i++, z++) {
+            for(int j=y-halfHeight, t=0; j<y+halfHeight; j++, t++) {
                 try {
                     argb = ryanGosling.getARGBArray(z, t);
 
@@ -36,11 +33,7 @@ public class RyanGoslingPainter {
                     }
                 } catch(ArrayIndexOutOfBoundsException e) {
                 }
-
-                t++;
             }
-
-            z++;
         }
     }
 

@@ -33,8 +33,7 @@ public class Kernel {
 
     public void convolve2d(CustomImage image) {
         int[][] subMatrix;
-        double convolutionRes;
-        double[][] newMatrix = new double[image.height][image.width];
+        int[][][] newMatrix = new int[image.height][image.width][4];
 
         for(int i=0; i<image.width; i++) {
             for(int j=0; j<image.height; j++) {
@@ -44,8 +43,7 @@ public class Kernel {
                     subMatrix = image.getSubRGB(i, j, size);
                 }
 
-                convolutionRes = this.convolve(subMatrix);
-                newMatrix[j][i] = convolutionRes;
+                newMatrix[j][i] = this.convolve(subMatrix);
             }
         }
 
@@ -54,18 +52,24 @@ public class Kernel {
 
         for(int i=0; i<image.width; i++) {
             for(int j=0; j<image.height; j++) {
-                convolutionRes = newMatrix[j][i];
-                image.setARGB(i, j, getARGBFromInt((int)convolutionRes));
+                image.setARGB(i, j, newMatrix[j][i]);
             }
         }
     }
 
-    private double convolve(int[][] imageSubMatrix) {
-        double res = 0;
+    private int[] convolve(int[][] imageSubMatrix) {
+        int[] argb;
+        int[] res = new int[] {0, 0, 0, 0};
+        int middle = (int)Math.ceil(size/2);
+        // On ne touche pas au alpha.
+        res[0] = getARGBFromInt(imageSubMatrix[middle][middle])[0];
 
         for(int i=0; i<size; i++) {
             for(int j=0; j<size; j++) {
-                res += imageSubMatrix[i][j]*matrix[i][j];
+                argb = getARGBFromInt(imageSubMatrix[i][j]);
+                res[1] += (int)argb[1]*matrix[i][j];
+                res[2] += (int)argb[2]*matrix[i][j];
+                res[3] += (int)argb[3]*matrix[i][j];
             }
         }
 
@@ -74,13 +78,13 @@ public class Kernel {
 
     private static double[][] getGaussianMatrix(int length) {
         double[][] res = new double[length][length];
-        double mean = (double)length/2;
+        int mean = (int)length/2;
         double sum = 0d, sigma = 1d;
 
         for(int i=0; i<length; i++) {
             for(int j=0; j<length; j++) {
-                res[i][j] = Math.exp(-0.5*(Math.pow((i - mean)/sigma, 2) + Math.pow((j - mean)/sigma, 2))/
-                            (2*Math.PI*sigma*sigma));
+                res[i][j] = Math.exp(-0.5*(Math.pow((i - mean)/sigma, 2) + Math.pow((j - mean)/sigma, 2)))/
+                            (2*Math.PI*sigma*sigma);
                 sum += res[i][j];
             }
         }

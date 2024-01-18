@@ -22,6 +22,10 @@ class OpenButton extends VMenuItem {
         this.setValues();
     }
 
+    public JFileChooser getFileChooser() {
+        return fileChooser;
+    }
+
     private void setValues() {
         fileChooser.setMultiSelectionEnabled(false);
         fileChooser.setFileFilter(new FileNameExtensionFilter("Images", "jpg", "jpeg", "png"));
@@ -31,6 +35,10 @@ class OpenButton extends VMenuItem {
 
     public File getSelectedFile() {
         return selectedFile;
+    }
+
+    void setSelectedFile(File file) {
+        selectedFile = file;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -43,7 +51,6 @@ class OpenButton extends VMenuItem {
                 mainPanel.getImagePanel().setImage(new CustomImage(ImageIO.read(selectedFile)));
                 mainPanel.getSidePanel().getInvertButton().setSelected(false);
             } catch(IOException ex) {
-
             }
         }
     }

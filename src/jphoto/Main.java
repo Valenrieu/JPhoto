@@ -18,7 +18,7 @@ public class Main {
 		MainPanel mainPanel = new MainPanel();
 		window.add(mainPanel);
 
-		JMenuBar menuBar = new CustomMenu(mainPanel);
+		CustomMenu menuBar = new CustomMenu(mainPanel);
 		window.setJMenuBar(menuBar);
 
 		window.setVisible(true);

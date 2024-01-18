@@ -1,6 +1,7 @@
 package jphoto.system;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 
 import static jphoto.system.utils.ImageUtils.getARGBFromArray;
 import static jphoto.system.utils.ImageUtils.getARGBFromInt;
@@ -14,12 +15,17 @@ public class CustomImage extends BufferedImage {
         this.getGraphics().drawImage(image, 0, 0, null);
     }
 
+    public byte[] getBytes() {
+        return ((DataBufferByte)this.getRaster().getDataBuffer()).getData();
+    }
+
     public int[][] getSubRGB(int x, int y, int size) {
         int[][] res = new int[size][size];
+        int halfSize = (int)size/2;
 
-        for(int i=x; i<size; i++) {
-            for(int j=y; j<size; j++) {
-                res[i][j] = this.getRGB(i, j);
+        for(int i=x-halfSize, z=0; i<x+halfSize; i++, z++) {
+            for(int j=y-halfSize, t=0; j<y+halfSize; j++, t++) {
+                res[z][t] = this.getRGB(i, j);
             }
         }
 

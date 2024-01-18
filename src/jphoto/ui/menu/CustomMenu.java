@@ -9,7 +9,7 @@ import jphoto.MainPanel;
 public class CustomMenu extends JMenuBar {
     JMenu file, cryptography, encryption, decryption, filter, blur;
     JMenuItem open, save, saveAs, aes128CBCEncryption, aes128CBCDecryption;
-    JMenuItem gaussianBlur, boxBlur, grayScale, blackAndWhite;
+    JMenuItem gaussianBlur, boxBlur, grayScale, blackAndWhite, psychedelic;
     MainPanel mainPanel;
 
     public CustomMenu(MainPanel mainPanel) {
@@ -18,13 +18,17 @@ public class CustomMenu extends JMenuBar {
         this.setSubmenus();
     }
 
+    public SaveButton getSaveButton() {
+        return (SaveButton)save;
+    }
+
     private void setSubmenus() {
         file = new JMenu("Fichier");
         this.add(file);
 
         open = new OpenButton(mainPanel);
-        save = new JMenuItem("Enregistrer");
-        saveAs = new JMenuItem("Enregistrer sous");
+        save = new SaveButton(this);
+        saveAs = new SaveAsButton(this);
         file.add(open);
         file.add(save);
         file.add(saveAs);
@@ -32,15 +36,17 @@ public class CustomMenu extends JMenuBar {
         filter = new JMenu("Filtres");
         blur = new JMenu("Flous");
         gaussianBlur = new GaussianBlurButton(mainPanel);
-        boxBlur = new JMenuItem("Flou par moyenne");
+        boxBlur = new BoxBlurButton(mainPanel);
         grayScale = new GrayScaleButton(mainPanel);
         blackAndWhite = new BlackAndWhiteButton(mainPanel);
+        psychedelic = new PsychedelicButton(mainPanel);
 
         blur.add(gaussianBlur);
         blur.add(boxBlur);
         filter.add(blur);
         filter.add(grayScale);
         filter.add(blackAndWhite);
+        filter.add(psychedelic);
         this.add(filter);
 
         cryptography = new JMenu("Cryptographie");

@@ -1,7 +1,7 @@
 package jphoto;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import javax.swing.JPanel;
 
 import jphoto.system.ImagePanel;
 import jphoto.ui.sidepanel.SidePanel;

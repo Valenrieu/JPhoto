@@ -1,7 +1,6 @@
 package jphoto.system.filters.blurs;
 
 import jphoto.system.filters.Filter;
-
 import jphoto.system.CustomImage;
 import jphoto.system.Kernel;
 import jphoto.system.filters.Filter;
@@ -29,10 +28,10 @@ public abstract class Blur implements Filter {
             min = height;
         }
 
-        Integer[] res = new Integer[(int)Math.ceil(min/2)];
-        int counter = 1;
+        Integer[] res = new Integer[(int)Math.ceil(min/2) - 2];
+        int counter = 3;
 
-        for(int i=0; i<res.length; i++) {
+        for(int i=0; i<res.length-2; i++) {
             res[i] = counter;
             counter += 2;
         }

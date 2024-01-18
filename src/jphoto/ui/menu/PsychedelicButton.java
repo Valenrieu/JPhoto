@@ -4,13 +4,13 @@ import java.awt.event.ActionEvent;
 
 import jphoto.MainPanel;
 import jphoto.system.CustomImage;
-import jphoto.system.filters.GrayScaleFilter;
+import jphoto.system.filters.PsychedelicFilter;
 
-class GrayScaleButton extends VMenuItem {
+class PsychedelicButton extends VMenuItem {
     private MainPanel mainPanel;
 
-    GrayScaleButton(MainPanel mainPanel) {
-        super("Niveau de gris");
+    PsychedelicButton(MainPanel mainPanel) {
+        super("Filtre psychédélique");
         this.mainPanel = mainPanel;
     }
 
@@ -18,7 +18,7 @@ class GrayScaleButton extends VMenuItem {
         CustomImage image = mainPanel.getImagePanel().getImage();
 
         if(image!=null) {
-            GrayScaleFilter filter = new GrayScaleFilter(image);
+            PsychedelicFilter filter = new PsychedelicFilter(image);
             mainPanel.getImagePanel().applyFilter(filter);
         }
     }
