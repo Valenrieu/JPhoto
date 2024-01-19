@@ -25,7 +25,7 @@ public class CustomImage extends BufferedImage {
 
         for(int i=x-halfSize, z=0; i<x+halfSize; i++, z++) {
             for(int j=y-halfSize, t=0; j<y+halfSize; j++, t++) {
-                res[z][t] = this.getRGB(i, j);
+                res[t][z] = this.getRGB(i, j);
             }
         }
 

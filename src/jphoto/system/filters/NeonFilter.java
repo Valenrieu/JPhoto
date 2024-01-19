@@ -2,10 +2,10 @@ package jphoto.system.filters;
 
 import jphoto.system.CustomImage;
 
-public class PsychedelicFilter implements Filter {
+public class NeonFilter implements Filter {
     private CustomImage image;
 
-    public PsychedelicFilter(CustomImage image) {
+    public NeonFilter(CustomImage image) {
         this.image = image;
     }
 

@@ -4,13 +4,13 @@ import java.awt.event.ActionEvent;
 
 import jphoto.MainPanel;
 import jphoto.system.CustomImage;
-import jphoto.system.filters.PsychedelicFilter;
+import jphoto.system.filters.NeonFilter;
 
-class PsychedelicButton extends VMenuItem {
+class NeonButton extends VMenuItem {
     private MainPanel mainPanel;
 
-    PsychedelicButton(MainPanel mainPanel) {
-        super("Filtre psychédélique");
+    NeonButton(MainPanel mainPanel) {
+        super("Filtre néon");
         this.mainPanel = mainPanel;
     }
 
@@ -18,7 +18,7 @@ class PsychedelicButton extends VMenuItem {
         CustomImage image = mainPanel.getImagePanel().getImage();
 
         if(image!=null) {
-            PsychedelicFilter filter = new PsychedelicFilter(image);
+            NeonFilter filter = new NeonFilter(image);
             mainPanel.getImagePanel().applyFilter(filter);
         }
     }

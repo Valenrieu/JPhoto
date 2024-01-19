@@ -34,10 +34,11 @@ public class Kernel {
     public void convolve2d(CustomImage image) {
         int[][] subMatrix;
         int[][][] newMatrix = new int[image.height][image.width][4];
+        int halfSize = (int)Math.ceil(size/2);
 
         for(int i=0; i<image.width; i++) {
             for(int j=0; j<image.height; j++) {
-                if(i-size<0 || i+size>=image.width || j-size<0 || j+size>=image.height) {
+                if(i-halfSize<0 || i+halfSize>=image.width || j-halfSize<0 || j+halfSize>=image.height) {
                     subMatrix = expandImage(image, i, j, size);
                 } else {
                     subMatrix = image.getSubRGB(i, j, size);
@@ -79,7 +80,7 @@ public class Kernel {
     private static double[][] getGaussianMatrix(int length) {
         double[][] res = new double[length][length];
         int mean = (int)length/2;
-        double sum = 0d, sigma = 1d;
+        double sum = 0d, sigma = (Math.ceil(length/2)/7)*2;
 
         for(int i=0; i<length; i++) {
             for(int j=0; j<length; j++) {
@@ -89,7 +90,7 @@ public class Kernel {
             }
         }
 
-        for(int i=0; i<length; i++) {
+       for(int i=0; i<length; i++) {
             for(int j=0; j<length; j++) {
                 res[i][j] = res[i][j]/sum; // Normalisation
             }

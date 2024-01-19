@@ -33,21 +33,25 @@ public final class ImageUtils {
         for(int i=x-halfKernelSize, z=0; i<x+halfKernelSize; i++, z++) {
             for(int j=y-halfKernelSize, t=0; j<y+halfKernelSize; j++, t++) {
                 try  {
-                    res[z][t] = getARGBFromArray(image.getARGBArray(i, j));
+                    res[t][z] = getARGBFromArray(image.getARGBArray(i, j));
                 } catch(ArrayIndexOutOfBoundsException e) {
                     if(i>=image.width) {
                         xx = image.width - 1;
                     } else if(i<0) {
                         xx = (i % halfKernelSize) + halfKernelSize;
+                    } else {
+                        xx = i;
                     }
 
                     if(j>=image.height) {
                         yy = image.height - 1;
                     } else if(j<0) {
                         yy = (j % halfKernelSize) + halfKernelSize;
+                    } else {
+                        yy = j;
                     }
 
-                    res[z][t] = getARGBFromArray(image.getARGBArray(xx, yy));
+                    res[t][z] = getARGBFromArray(image.getARGBArray(xx, yy));
                 }
             }
         }
