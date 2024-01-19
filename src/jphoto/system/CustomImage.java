@@ -3,6 +3,7 @@ package jphoto.system;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
+import jphoto.system.cryptography.Encryption;
 import static jphoto.system.utils.ImageUtils.getARGBFromArray;
 import static jphoto.system.utils.ImageUtils.getARGBFromInt;
 
@@ -17,6 +18,12 @@ public class CustomImage extends BufferedImage {
 
     public byte[] getBytes() {
         return ((DataBufferByte)this.getRaster().getDataBuffer()).getData();
+    }
+
+    public static CustomImage getImageFromBytes(byte[] bytes, int width, int height) {
+            BufferedImage res = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+            res.getRaster().setDataElements(0, 0, width, height, bytes);
+            return new CustomImage(res);
     }
 
     public int[][] getSubRGB(int x, int y, int size) {

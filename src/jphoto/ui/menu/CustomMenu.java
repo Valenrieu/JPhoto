@@ -52,8 +52,8 @@ public class CustomMenu extends JMenuBar {
         cryptography = new JMenu("Cryptographie");
         encryption = new JMenu("Chiffrer");
         decryption = new JMenu("Déchiffrer");
-        aes128CBCEncryption = new JMenuItem("AES 128 bits avec CBC");
-        aes128CBCDecryption = new JMenuItem("AES 128 bits avec CBC");
+        aes128CBCEncryption = new AES128CBCEncryptionButton(mainPanel);
+        aes128CBCDecryption = new AES128CBCDecryptionButton(mainPanel);
 
         encryption.add(aes128CBCEncryption);
         decryption.add(aes128CBCDecryption);
