@@ -1,32 +1,21 @@
-package jphoto.system;
+package jphoto.system.kernels;
 
 import jphoto.system.CustomImage;
+
 import static jphoto.system.utils.ImageUtils.expandImage;
 import static jphoto.system.utils.ImageUtils.getARGBFromInt;
 
-public class Kernel {
-    public final KernelType type;
+public abstract class Kernel {
     public final int size;
-    private double[][] matrix;
+    private final double[][] matrix;
 
-    public Kernel(KernelType type, int size) throws UndefinedKernelTypeException, IllegalArgumentException {
+    Kernel(int size, double[][] matrix) throws IllegalArgumentException {
         if(size % 2 == 0) {
             throw new IllegalArgumentException();
         }
 
         this.size = size;
-        this.type = type;
-
-        switch(type) {
-            case GAUSSIAN:
-                matrix = getGaussianMatrix(size);
-                break;
-            case BOX:
-                matrix = getBoxMatrix(size);
-                break;
-            default:
-                throw new UndefinedKernelTypeException();
-        }
+        this.matrix = matrix;
     }
 
     // J'utilise la methode d'extension de l'image si le noyau depasse.
@@ -71,42 +60,6 @@ public class Kernel {
                 res[1] += (int)argb[1]*matrix[i][j];
                 res[2] += (int)argb[2]*matrix[i][j];
                 res[3] += (int)argb[3]*matrix[i][j];
-            }
-        }
-
-        return res;
-    }
-
-    private static double[][] getGaussianMatrix(int length) {
-        double[][] res = new double[length][length];
-        int mean = (int)length/2;
-        double sum = 0d, sigma = (Math.ceil(length/2)/7)*2;
-
-        for(int i=0; i<length; i++) {
-            for(int j=0; j<length; j++) {
-                res[i][j] = Math.exp(-0.5*(Math.pow((i - mean)/sigma, 2) + Math.pow((j - mean)/sigma, 2)))/
-                            (2*Math.PI*sigma*sigma);
-                sum += res[i][j];
-            }
-        }
-
-       for(int i=0; i<length; i++) {
-            for(int j=0; j<length; j++) {
-                res[i][j] = res[i][j]/sum; // Normalisation
-            }
-        }
-
-        return res;
-    }
-
-    private static double[][] getBoxMatrix(int length) {
-        double[][] res = new double[length][length];
-
-        for(int i=0; i<length; i++) {
-            for(int j=0; j<length; j++) {
-                // On normalise par la somme des coeffs,
-                // comme ce sont des 1, c'est trivial a calculer.
-                res[i][j] = 1d/(double)(length*length);
             }
         }
 

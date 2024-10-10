@@ -1,21 +1,10 @@
 package jphoto.system.filters.blurs;
 
 import jphoto.system.CustomImage;
-import jphoto.system.Kernel;
-import jphoto.system.KernelType;
-import jphoto.system.UndefinedKernelTypeException;
+import jphoto.system.kernels.GaussianKernel;
 
 public class GaussianBlur extends Blur {
-    public GaussianBlur(CustomImage image, int kernelSize) throws IllegalArgumentException {
-        super(image);
-
-        try {
-            kernel = new Kernel(KernelType.GAUSSIAN, kernelSize);
-        } catch(IllegalArgumentException e) {
-            // Pas cense se declencher. 
-            throw e;
-        } catch(UndefinedKernelTypeException e) {
-            // Encore moins
-        }
+    public GaussianBlur(CustomImage image, int kernelSize, double sigma) throws IllegalArgumentException {
+        super(image, new GaussianKernel(kernelSize, sigma));
     }
 }

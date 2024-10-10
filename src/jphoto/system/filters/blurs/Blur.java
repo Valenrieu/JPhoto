@@ -2,15 +2,15 @@ package jphoto.system.filters.blurs;
 
 import jphoto.system.filters.Filter;
 import jphoto.system.CustomImage;
-import jphoto.system.Kernel;
-import jphoto.system.filters.Filter;
+import jphoto.system.kernels.Kernel;
 
 public abstract class Blur implements Filter {
     protected CustomImage image;
     protected Kernel kernel;
 
-    Blur(CustomImage image) throws IllegalArgumentException {
+    Blur(CustomImage image, Kernel kernel) throws IllegalArgumentException {
         this.image = image;
+        this.kernel = kernel;
     }
 
     public final void compute() {
